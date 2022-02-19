@@ -8,39 +8,39 @@ public class ArrayStorage {
     private int size = 0;
 
     void clear() {
-        for (int i = 0; i < this.size; i++) {
-            this.storage[i] = null;
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
         }
-        this.size = 0;
+        size = 0;
     }
 
     void save(Resume r) {
-        if (this.size < this.storage.length) {
-            this.storage[this.size] = r;
-            this.size++;
+        if (size < storage.length) {
+            storage[size] = r;
+            size++;
         }
     }
 
     Resume get(String uuid) {
-        int id = GetIdByUUID(uuid);
-        if (id > -1) {
-            return this.storage[id];
+        int index = findIndex(uuid);
+        if (index > -1) {
+            return storage[index];
         } else {
             return null;
         }
     }
 
     void delete(String uuid) {
-        int id = GetIdByUUID(uuid);
-        if (id > -1) {
-            for (int i = id; i < this.size; i++) {
-                if (i < this.storage.length - 1) {
-                    this.storage[i] = this.storage[i + 1];
+        int index = findIndex(uuid);
+        if (index > -1) {
+            for (int i = index; i < size; i++) {
+                if (i < storage.length - 1) {
+                    storage[i] = storage[i + 1];
                 } else {
-                    this.storage[i] = null;
+                    storage[i] = null;
                 }
             }
-            this.size--;
+            size--;
         }
     }
 
@@ -48,21 +48,19 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(this.storage, this.size);
+        return Arrays.copyOf(storage, size);
     }
 
     int size() {
-        return this.size;
+        return size;
     }
 
-    private int GetIdByUUID(String uuid) {
-        int id = -1;
-        for (int i = 0; i < this.size; i++) {
-            if (this.storage[i].uuid.equals(uuid)) {
-                id = i;
-                break;
+    private int findIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
             }
         }
-        return id;
+        return -1;
     }
 }
