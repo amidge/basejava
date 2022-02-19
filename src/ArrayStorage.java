@@ -25,9 +25,8 @@ public class ArrayStorage {
         int index = findIndex(uuid);
         if (index > -1) {
             return storage[index];
-        } else {
-            return null;
         }
+        return null;
     }
 
     void delete(String uuid) {
