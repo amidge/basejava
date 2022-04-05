@@ -1,3 +1,4 @@
+package com.amidge;
 /**
  * Initial resume class
  */

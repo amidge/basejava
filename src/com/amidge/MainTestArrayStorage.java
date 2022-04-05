@@ -1,3 +1,4 @@
+package com.amidge;
 /**
  * Test for your ArrayStorage implementation
  */
