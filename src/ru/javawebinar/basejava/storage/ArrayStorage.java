@@ -1,4 +1,7 @@
-package com.amidge;
+package ru.javawebinar.basejava.storage;
+
+import ru.javawebinar.basejava.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -14,19 +17,19 @@ public class ArrayStorage {
     }
 
     public void update(Resume r) {
-        int i = findIndex(r.uuid);
+        int i = findIndex(r.getUuid());
         if (i == -1) {
-            System.out.println("ERROR: Resume[" + r.uuid + "] isn't exist!");
+            System.out.println("Resume " + r.getUuid() + " isn't exist!");
         } else {
             storage[i] = r;
         }
     }
 
     public void save(Resume r) {
-        if (findIndex(r.uuid) != -1) {
-            System.out.println("ERROR: Resume[" + r.uuid + "] already is exist!");
+        if (findIndex(r.getUuid()) != -1) {
+            System.out.println("Resume " + r.getUuid() + " already exist!");
         } else if (size == storage.length) {
-            System.out.println("ERROR: Storage overflow");
+            System.out.println("Storage overflow");
         } else {
             storage[size] = r;
             size++;
@@ -36,7 +39,7 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         int i = findIndex(uuid);
         if (i == -1) {
-            System.out.println("ERROR: Resume[" + uuid + "] isn't exist!");
+            System.out.println("Resume " + uuid + " isn't exist!");
             return null;
         }
         return storage[i];
@@ -45,7 +48,7 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int i = findIndex(uuid);
         if (i == -1) {
-            System.out.println("ERROR: Resume[" + uuid + "] isn't exist!");
+            System.out.println("Resume " + uuid + " isn't exist!");
         } else {
             storage[i] = storage[size - 1];
             storage[size - 1] = null;
@@ -56,17 +59,17 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 
     private int findIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (uuid.equals(storage[i].getUuid())) {
                 return i;
             }
         }
