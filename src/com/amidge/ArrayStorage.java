@@ -5,53 +5,51 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10000];
     private int size = 0;
 
-    void clear() {
-        Arrays.fill(storage, 0, size,null);
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    void update(Resume r) {
-        int i = findIndex(r.uuid);
-        if (i > -1) {
-            storage[i] = r;
-        } else {
-            System.out.println("ERROR: Resume[" + r.uuid + "] isn't exist!");
-        }
-    }
-
-    void save(Resume r) {
+    public void update(Resume r) {
         int i = findIndex(r.uuid);
         if (i == -1) {
-            if (size < storage.length) {
-                storage[size] = r;
-                size++;
-            }
+            System.out.println("ERROR: Resume[" + r.uuid + "] isn't exist!");
         } else {
-            System.out.println("ERROR: Resume[" + i + "] is exist!");
+            storage[i] = r;
         }
     }
 
-    Resume get(String uuid) {
-        int i = findIndex(uuid);
-        if (i > -1) {
-            return storage[i];
+    public void save(Resume r) {
+        if (findIndex(r.uuid) != -1) {
+            System.out.println("ERROR: Resume[" + r.uuid + "] already is exist!");
+        } else if (size == storage.length) {
+            System.out.println("ERROR: Storage overflow");
         } else {
+            storage[size] = r;
+            size++;
+        }
+    }
+
+    public Resume get(String uuid) {
+        int i = findIndex(uuid);
+        if (i == -1) {
             System.out.println("ERROR: Resume[" + uuid + "] isn't exist!");
             return null;
         }
+        return storage[i];
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int i = findIndex(uuid);
-        if (i > -1) {
+        if (i == -1) {
+            System.out.println("ERROR: Resume[" + uuid + "] isn't exist!");
+        } else {
             storage[i] = storage[size - 1];
             storage[size - 1] = null;
             size--;
-        } else {
-            System.out.println("ERROR: Resume[" + uuid + "] isn't exist!");
         }
     }
 
