@@ -20,16 +20,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     // Not-Reinventing-the-wheel
     protected void insertElement(Resume r, int index) {
         int insertIndex = -index - 1;
+        if (insertIndex < 0) {
+            System.out.println("insertIndex = " + insertIndex);
+        }
         System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
         storage[insertIndex] = r;
     }
 
     @Override
     protected int getIndex(String uuid) {
-        Resume searchKey = new Resume();
-        searchKey.setUuid(uuid);
-        int index = Arrays.binarySearch(storage, 0, size, searchKey);
-        System.out.println("getIndex(" + uuid + ") = " + index);
-        return index;
+        Resume searchKey = new Resume(uuid);
+        return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 }
