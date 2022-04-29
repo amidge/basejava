@@ -64,7 +64,6 @@ public class Organisation {
             Objects.requireNonNull(startDate, "startDate must not be null");
             Objects.requireNonNull(endDate, "endDate must not be null");
             Objects.requireNonNull(title, "title must not be null");
-
             this.startDate = startDate;
             this.endDate = endDate;
             this.title = title;
