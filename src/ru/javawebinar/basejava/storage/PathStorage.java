@@ -51,7 +51,7 @@ public class PathStorage extends AbstractStorage<Path> {
         try {
             Files.createFile(path);
         } catch (IOException e) {
-            throw new StorageException("Couldn't create path " + path.toString(), r.getUuid(), e);
+            throw new StorageException("Couldn't create path " + path, r.getUuid(), e);
         }
         doUpdate(r, path);
     }
