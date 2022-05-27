@@ -35,6 +35,22 @@ public abstract class AbstractStorageTest {
         R3 = ResumeTestData.generateResume(UUID_3, "Name3");
         R4 = ResumeTestData.generateResume(UUID_4, "Name4");
     }
+//    static {
+//        R1 = new Resume(UUID_1, "Name1");
+//        R2 = new Resume(UUID_2, "Name2");
+//        R3 = new Resume(UUID_3, "Name3");
+//        R4 = new Resume(UUID_4, "Name4");
+//
+
+//        R2.addContact(ContactType.SKYPE, "skype2");
+//        R2.addContact(ContactType.PHONE, "22222");
+//        R2.addSection(SectionType.EXPERIENCE,
+//                new OrganizationSection(
+//                        new Organization("Organization2", "http://Organization2.ru",
+//                                new Organization.Position(2015, Month.JANUARY, "position1", "content1"))));
+//    }
+
+
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;

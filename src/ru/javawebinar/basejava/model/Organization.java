@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Organisation implements Serializable {
+public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
     private final Link homePage;
     private List<Position> positions = new ArrayList<>();
 
-    public Organisation(String name, String url, Position... positions) {
+    public Organization(String name, String url, Position... positions) {
         this(new Link(name, url), Arrays.asList(positions));
     }
 
-    public Organisation(Link homePage, List<Position> positions) {
+    public Organization(Link homePage, List<Position> positions) {
         this.homePage = homePage;
         this.positions = positions;
     }
@@ -30,7 +30,7 @@ public class Organisation implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Organisation that = (Organisation) o;
+        Organization that = (Organization) o;
 
         if (homePage != null ? !homePage.equals(that.homePage) : that.homePage != null) return false;
         return positions != null ? positions.equals(that.positions) : that.positions == null;
@@ -48,7 +48,15 @@ public class Organisation implements Serializable {
         return "Organisation{" + homePage + "," + positions + '}';
     }
 
-    public static class Position implements Serializable{
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
+    }
+
+    public static class Position implements Serializable {
         private static final long serialVersionUID = 1L;
         private final LocalDate startDate;
         private final LocalDate endDate;
@@ -70,7 +78,7 @@ public class Organisation implements Serializable {
             this.startDate = startDate;
             this.endDate = endDate;
             this.title = title;
-            this.description = description;
+            this.description = description == null ? "" : description;
         }
 
 
@@ -111,7 +119,7 @@ public class Organisation implements Serializable {
 
         @Override
         public String toString() {
-            return "Position(" + startDate + "," + endDate  + "," + title  + "," + description + ')';
+            return "Position(" + startDate + "," + endDate + "," + title + "," + description + ')';
         }
     }
 }
